@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Create or Edit";
+}
+
+@model BasicCarRentalSystemCRUD.Models.CarRenter
+
+<div class="text-center">
+    <h1 class="display-4">Create or Edit Users</h1>
+</div>
+
+<form asp-action="CreateEditUserForm" asp-controller="Home">
+    <label class="mt-4"> Car Model</label>
+    <input class="form-control" type="text" placeholder="Car Model" asp-for="CarModel" />
+    <label class="mt-4"> Name</label>
+    <input class="form-control" type="text" placeholder="Name" asp-for="CustomerName" />
+    <label class="mt-4"> Date Now</label>
+    <input class="form-control" type="datetime-local" placeholder="Date Now" asp-for="RentalDate" />
+    <label class="mt-4"> Return Date</label>
+    <input class="form-control" type="datetime-local" placeholder="Return Date" asp-for="ReturnDate" />
+
+    <button class="btn btn-primary mt-4" type="submit">Submit</button>
+</form>
