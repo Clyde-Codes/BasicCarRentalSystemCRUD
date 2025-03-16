@@ -8,9 +8,12 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ManagementDbContext _context;
+
+    public HomeController(ILogger<HomeController> logger, ManagementDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
@@ -20,17 +23,42 @@ public class HomeController : Controller
 
     public IActionResult Management()
     {
-        return View();
+        
+        var allManagement = _context.Management.ToList();
+        return View(allManagement);
     }
     
-    public IActionResult CreateEditUser()
+    public IActionResult CreateEditUser(int? id)
     {
+        if(id != null)
+        {
+            var managementInDb = _context.Management.SingleOrDefault(renter => renter.Id == id);
+            return View(managementInDb);
+        }
+
+        
         return View();
+    }
+
+    public IActionResult Delete(int id)
+    {
+        var managementInDb = _context.Management.SingleOrDefault(renter => renter.Id == id);
+        _context.Management.Remove(managementInDb);
+        _context.SaveChanges();
+        return RedirectToAction("Management");
     }
 
     public IActionResult CreateEditUserForm(CarRenter model)
     {
-        return RedirectToAction("Management"); 
+        if (model.Id == 0)
+        {
+            _context.Management.Add(model);
+        } else
+        {
+            _context.Management.Update(model);
+        }
+            _context.SaveChanges();
+            return RedirectToAction("Management"); 
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

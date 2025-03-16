@@ -2,8 +2,62 @@
     ViewData["Title"] = "Car Rental System";
 }
 
+@model List<CarRenter>
+
 <div class="text-center">
     <h1 class="display-4">Rent Management</h1>
-
     <a asp-action="CreateEditUser" class="btn btn-secondary">Add Renter</a>
+    <br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Car Model
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Date Rented
+                </th>
+                <th>
+                    Date Return
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var renter in Model)
+                {
+                    <tr>
+                        <td>
+                            @renter.Id
+                        </td>
+                        <td>
+                            @renter.CarModel
+                        </td>
+                        <td>
+                            @renter.CustomerName
+                        </td>
+                        <td>
+                            @renter.RentalDate
+                        </td>
+                        <td>
+                            @renter.ReturnDate
+                        </td>
+
+                        <td>
+                            <a asp-action="CreateEditUser" asp-route-id="@renter.Id">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@renter.Id">Delete</a>
+                        </td>
+                    
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>

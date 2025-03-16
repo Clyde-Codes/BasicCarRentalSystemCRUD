@@ -1,3 +1,6 @@
+using BasicCarRentalSystemCRUD.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace BasicCarRentalSystemCRUD
 {
     public class Program
@@ -8,6 +11,8 @@ namespace BasicCarRentalSystemCRUD
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ManagementDbContext>(options => 
+                options.UseInMemoryDatabase("ManagementDb"));
 
             var app = builder.Build();
 

@@ -9,6 +9,8 @@
 </div>
 
 <form asp-action="CreateEditUserForm" asp-controller="Home">
+
+    <input hidden class="form-control" type="text" placeholder="Id" asp-for="Id" />
     <label class="mt-4"> Car Model</label>
     <input class="form-control" type="text" placeholder="Car Model" asp-for="CarModel" />
     <label class="mt-4"> Name</label>
